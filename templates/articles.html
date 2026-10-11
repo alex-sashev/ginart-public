@@ -1,0 +1,13 @@
+{% extends "page.html" %}
+{% block content %}
+{% if categories|length > 1 %}
+<div class="chips" role="group" aria-label="Категории">
+  <button type="button" class="chip" aria-pressed="true" data-filter="">Всички</button>
+  {% for c in categories %}<button type="button" class="chip" aria-pressed="false" data-filter="{{ c }}">{{ c }}</button>{% endfor %}
+</div>
+{% endif %}
+<div class="art-cards art-list">
+  {% for art in articles %}{% include "_article_card.html" %}{% endfor %}
+</div>
+{{ page.body|safe }}
+{% endblock %}

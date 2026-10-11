@@ -1,0 +1,15 @@
+{% extends "page.html" %}
+{% block content %}
+{% for d in doctors %}
+<section class="doctor-full" id="{{ d.slug }}">
+  <img src="{{ d.photo }}" alt="{{ d.name }}">
+  <div>
+    <h2>{{ d.name }}</h2>
+    <p class="role">{{ d.role }}</p>
+    {% include "_rating.html" %}
+    {{ d.body|safe }}
+  </div>
+</section>
+{% endfor %}
+{{ page.body|safe }}
+{% endblock %}

@@ -1,0 +1,69 @@
+# Homepage, section by section (top to bottom).
+# Every section has "show: true/false" — set to false to hide it from the homepage.
+
+hero:
+  show: true
+  eyebrow: СПЕЦИАЛИЗИРАНА АКУШЕРО-ГИНЕКОЛОГИЧНА ПРАКТИКА
+  heading: Грижа за женското здраве във всеки етап от живота
+  text: Професионална медицинска грижа, индивидуално отношение и съвременна диагностика за Вашето спокойствие.
+  book_button: Запази час
+  call_button: "Обади се: 0878 504 517"
+  handwritten: За всяка жена.<br>Във всяка фаза.<br>С грижа.
+  image: /images/hero-woman.jpg
+  image_alt: Усмихната жена
+  # Four short points under the buttons. Icon: heart, team, diamond or shield
+  points:
+    - icon: heart
+      text: Професионализъм и опит
+    - icon: team
+      text: Индивидуално отношение
+    - icon: diamond
+      text: Съвременна апаратура
+    - icon: shield
+      text: Работим със здравната каса
+
+doctors:
+  show: true
+  heading: Нашите специалисти
+  link_text: Виж всички специалисти
+  # The doctors themselves are edited in content/doctors/
+
+services:
+  show: true
+  heading: Нашите услуги
+  link_text: Виж всички услуги
+  # The three cards (Диагностика, Бременност, Хирургия) come from the section pages
+  # in content/pages/ (diagnostika.md, bremennost.md, hirurgia.md) and list their services.
+
+about:
+  show: true
+  eyebrow: ЗА ГИНАРТ
+  heading: Повече от преглед. Дългосрочна грижа.
+  text: >-
+    „ГинАрт“ е високоспециализиран акушеро-гинекологичен кабинет, който предлага
+    профилактика и лечение на всички акушеро-гинекологични заболявания — за жени
+    във всяка възраст, включително по време на бременност. Съвременна апаратура,
+    опитни специалисти и внимателно отношение към всяка пациентка.
+  button_text: Научи повече за нас
+  button_link: /za-ginart/
+  image: /images/reception.jpg
+  image_alt: Рецепцията на ГинАрт
+  handwritten: Здравето<br>е сила
+
+patients:
+  show: true
+  heading: За пациентите
+  link_text: Виж всички статии
+  count: 3          # how many of the newest articles to show
+
+reviews:
+  # Keep hidden until you have real reviews from patients (with their consent).
+  show: false
+  heading: Какво казват нашите пациентки
+  items: []
+
+cta:
+  show: true
+  heading: Готови ли сте да се погрижите за своето здраве?
+  text: "Запазете час на телефон 0878 504 517, понеделник – петък, 14:00 – 18:00 ч."
+  button_text: Обади се сега

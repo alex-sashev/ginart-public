@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="page-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Навигация">
+      <a href="/">Начало</a>
+      {% if page.type == "service" %}<span>/</span>{% if page.sections %}<a href="/{{ page.sections[0].slug }}/">{{ page.sections[0].heading }}</a>{% else %}<a href="/uslugi/">Услуги</a>{% endif %}{% endif %}
+      <span>/</span><span aria-current="page">{{ page.heading }}</span>
+    </nav>
+    <h1>{{ page.heading }}</h1>
+    {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
+    {% if page.type == "service" or page.template == "section" %}
+    <div class="cta-row hero-cta">
+      <a href="tel:{{ site.phone_link }}" class="btn btn-primary"><svg><use href="#i-cal"/></svg><span>{{ site.book_button }}</span></a>
+      <a href="tel:{{ site.phone_link }}" class="btn btn-ghost"><svg><use href="#i-phone"/></svg><span>{{ site.phone }}</span></a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+<div class="wrap page-grid">
+  <article class="prose">
+    {% block content %}
+    {% if page.image %}<img class="page-img" src="{{ page.image }}" alt="">{% endif %}
+    {{ page.body|safe }}
+    {% endblock %}
+  </article>
+
+  <aside class="side">
+    <div class="side-card book-card">
+      <h2>Запазете час</h2>
+      <a class="btn btn-primary" href="tel:{{ site.phone_link }}"><svg><use href="#i-phone"/></svg><span>{{ site.phone }}</span></a>
+      <p><svg><use href="#i-clock"/></svg>{{ site.hours }}</p>
+      <p><svg><use href="#i-pin"/></svg><a href="{{ site.map_link }}" target="_blank" rel="noopener">{{ site.address }}</a></p>
+      <p class="meta">{{ site.nzok_note }}</p>
+    </div>
+    {% if page.type == "service" %}
+    <div class="side-card">
+      <h2>{{ page.sections[0].heading if page.sections else 'Други услуги' }}</h2>
+      <ul class="side-links">
+        {% set pool = page.sections[0].services if page.sections else services %}
+        {% for s in pool if s.slug != page.slug %}<li><a href="/{{ s.slug }}/">{{ s.heading }}</a></li>{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </aside>
+</div>
+{% endblock %}

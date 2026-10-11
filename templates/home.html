@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}Гинеколог в София, работещ със здравната каса — ГинАрт{% endblock %}
+{% block main %}
+
+{% set h = home.hero %}
+{% if h.show %}
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">{{ h.eyebrow }}</p>
+      <h1>{{ h.heading }}</h1>
+      <p class="lead">{{ h.text }}</p>
+      <div class="cta-row">
+        <a href="tel:{{ site.phone_link }}" class="btn btn-primary"><svg><use href="#i-cal"/></svg><span>{{ h.book_button }}</span><svg><use href="#i-arr"/></svg></a>
+        <a href="tel:{{ site.phone_link }}" class="btn btn-ghost"><svg><use href="#i-phone"/></svg><span>{{ h.call_button }}</span></a>
+      </div>
+      <ul class="trust">
+        {% for p in h.points %}<li><svg><use href="#i-{{ p.icon }}"/></svg><span>{{ p.text }}</span></li>{% endfor %}
+      </ul>
+    </div>
+    <div class="hero-art">
+      <div class="blob" aria-hidden="true"></div>
+      <img class="hero-img" src="{{ h.image }}" alt="{{ h.image_alt }}">
+      {% if h.handwritten %}<div class="script-box" aria-hidden="true"><p class="script">{{ h.handwritten|safe }}</p><span class="rule"></span></div>{% endif %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% set a = home.about %}
+{% if a.show %}
+<section class="about" id="za-nas">
+  <img class="room-img" src="{{ a.image }}" alt="{{ a.image_alt }}">
+  <div class="txt">
+    <p class="eyebrow">{{ a.eyebrow }}</p>
+    <h2>{{ a.heading }}</h2>
+    <p>{{ a.text }}</p>
+    <a class="btn btn-rose" href="{{ a.button_link }}"><span>{{ a.button_text }}</span><svg><use href="#i-arr"/></svg></a>
+  </div>
+  {% if a.handwritten %}<div class="figure" aria-hidden="true"><img src="/images/figure.png" alt=""><span class="script">{{ a.handwritten|safe }}</span></div>{% endif %}
+</section>
+{% endif %}
+
+{% if home.services.show %}
+<section class="block wrap" id="uslugi">
+  <div class="head">
+    <h2>{{ home.services.heading }}</h2>
+    <a class="link" href="/uslugi/"><span>{{ home.services.link_text }}</span><svg><use href="#i-arr"/></svg></a>
+  </div>
+  <div class="pillars">
+    {% for sec in sections %}
+    <article class="pillar">
+      <a class="pillar-head" href="/{{ sec.slug }}/">
+        <div class="ic"><svg><use href="#i-{{ sec.icon }}"/></svg></div>
+        <h3>{{ sec.heading }}</h3>
+      </a>
+      <p>{{ sec.summary }}</p>
+      <ul>
+        {% for s in sec.services[:5] %}<li><a href="/{{ s.slug }}/">{{ s.heading }}<svg><use href="#i-arr"/></svg></a></li>{% endfor %}
+      </ul>
+      <a class="link" href="/{{ sec.slug }}/"><span>Научете повече</span><svg><use href="#i-arr"/></svg></a>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if home.doctors.show %}
+<section class="block wrap" id="specialisti">
+  <div class="head">
+    <h2>{{ home.doctors.heading }}</h2>
+    <a class="link" href="/specialisti/"><span>{{ home.doctors.link_text }}</span><svg><use href="#i-arr"/></svg></a>
+  </div>
+  <div class="docs">
+    {% for d in doctors %}
+    <article class="doc">
+      <img class="portrait-img" src="{{ d.photo }}" alt="{{ d.name }}">
+      <div>
+        <h3>{{ d.name }}</h3>
+        <p class="role">{{ d.role }}</p>
+        {% include "_rating.html" %}
+        <p>{{ d.summary }}</p>
+        <div class="acts">
+          <a class="link" href="/specialisti/#{{ d.slug }}"><span>Виж профил</span><svg><use href="#i-arr"/></svg></a>
+          <a class="btn btn-primary" href="tel:{{ site.phone_link }}"><svg><use href="#i-cal"/></svg><span>{{ site.book_button }}</span></a>
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if home.reviews.show and home.reviews["items"] %}
+<section class="block wrap" id="otzivi">
+  <div class="head"><h2>{{ home.reviews.heading }}</h2></div>
+  <div class="quotes">
+    {% for q in home.reviews["items"] %}
+    <figure class="q"><p>{{ q.text }}</p><footer><span>{{ q.name }}</span><span class="stars" aria-label="{{ q.stars }} от 5">{{ "★" * (q.stars|int) }}</span></footer></figure>
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% if home.patients.show and articles %}
+<section class="block wrap" id="za-pacientite">
+  <div class="head">
+    <h2>{{ home.patients.heading }}</h2>
+    <a class="link" href="/za-pacientite/"><span>{{ home.patients.link_text }}</span><svg><use href="#i-arr"/></svg></a>
+  </div>
+  <div class="art-cards">
+    {% for art in articles[:home.patients.count|default(3)] %}{% include "_article_card.html" %}{% endfor %}
+  </div>
+</section>
+{% endif %}
+
+{% include "_cta.html" %}
+
+{% endblock %}

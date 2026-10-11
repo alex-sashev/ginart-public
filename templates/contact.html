@@ -1,0 +1,11 @@
+{% extends "page.html" %}
+{% block content %}
+<dl class="contact-list">
+  <div><dt>Телефон за записване</dt><dd><a href="tel:{{ site.phone_link }}">{{ site.phone }}</a></dd></div>
+  <div><dt>Работно време</dt><dd>{{ site.hours }}</dd></div>
+  <div><dt>Адрес</dt><dd>{{ site.address }}<br><span class="meta">{{ site.address_note }}</span></dd></div>
+</dl>
+<p class="meta">{{ site.booking_note }}</p>
+<p><a class="btn btn-ghost" href="{{ site.map_link }}" target="_blank" rel="noopener"><svg><use href="#i-pin"/></svg><span>Отвори в Google Maps</span></a></p>
+{{ page.body|safe }}
+{% endblock %}

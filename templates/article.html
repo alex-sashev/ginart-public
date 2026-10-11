@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block main %}
+<section class="page-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Навигация">
+      <a href="/">Начало</a><span>/</span><a href="/za-pacientite/">За пациентите</a>
+    </nav>
+    {% if page.category %}<p class="eyebrow" style="margin:.8rem 0 0">{{ page.category }}</p>{% endif %}
+    <h1>{{ page.heading }}</h1>
+    {% if page.excerpt %}<p class="lead">{{ page.excerpt }}</p>{% endif %}
+  </div>
+</section>
+<div class="wrap page-grid">
+  <article class="prose">
+    {{ page.body|safe }}
+    <p class="disclaimer">Информацията в тази статия е обща и не замества консултацията с лекар. При оплаквания запишете час за преглед.</p>
+  </article>
+  <aside class="side">
+    <div class="side-card book-card">
+      <h2>Запазете час</h2>
+      <a class="btn btn-primary" href="tel:{{ site.phone_link }}"><svg><use href="#i-phone"/></svg><span>{{ site.phone }}</span></a>
+      <p><svg><use href="#i-clock"/></svg>{{ site.hours }}</p>
+    </div>
+    <div class="side-card">
+      <h2>Още статии</h2>
+      <ul class="side-links">
+        {% for a in articles if a.slug != page.slug %}{% if loop.index <= 5 %}<li><a href="/za-pacientite/{{ a.slug }}/">{{ a.heading }}</a></li>{% endif %}{% endfor %}
+      </ul>
+    </div>
+  </aside>
+</div>
+{% endblock %}

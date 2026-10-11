@@ -1,0 +1,9 @@
+<a class="art-card" href="/za-pacientite/{{ art.slug }}/" data-category="{{ art.category }}">
+  {% if art.image %}<img src="{{ art.image }}" alt="" loading="lazy">{% else %}<div class="art-ph" aria-hidden="true"><svg><use href="#i-heart"/></svg></div>{% endif %}
+  <div>
+    {% if art.category %}<span class="tag">{{ art.category }}</span>{% endif %}
+    <h3>{{ art.heading }}</h3>
+    <p>{{ art.excerpt }}</p>
+    <span class="link">Прочетете <svg><use href="#i-arr"/></svg></span>
+  </div>
+</a>

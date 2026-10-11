@@ -1,0 +1,190 @@
+# Pages CMS (https://pagescms.org) — point-and-click editor for the content files.
+# Optional: everything here can also be edited directly on GitHub.
+
+media:
+  input: static/images
+  output: /images
+
+content:
+  - name: home
+    label: Начална страница
+    type: file
+    path: content/home.yml
+    fields:
+      - name: hero
+        label: Горна секция (снимка и заглавие)
+        type: object
+        fields:
+          - { name: show, label: Показвай секцията, type: boolean, default: true }
+          - { name: eyebrow, label: Малък надпис над заглавието, type: string }
+          - { name: heading, label: Заглавие, type: string }
+          - { name: text, label: Текст, type: text }
+          - { name: book_button, label: Бутон „Запази час“, type: string }
+          - { name: call_button, label: Бутон „Обади се“, type: string }
+          - { name: handwritten, label: Ръкописен текст (<br> = нов ред), type: string }
+          - { name: image, label: Снимка, type: image }
+          - { name: image_alt, label: Описание на снимката, type: string }
+          - name: points
+            label: Кратки предимства
+            type: object
+            list: true
+            fields:
+              - { name: icon, label: Икона, type: select, options: { values: [heart, team, diamond, shield] } }
+              - { name: text, label: Текст, type: string }
+      - name: doctors
+        label: Секция „Специалисти“
+        type: object
+        fields:
+          - { name: show, label: Показвай секцията, type: boolean, default: true }
+          - { name: heading, label: Заглавие, type: string }
+          - { name: link_text, label: Текст на линка, type: string }
+      - name: services
+        label: Секция „Услуги“
+        type: object
+        fields:
+          - { name: show, label: Показвай секцията, type: boolean, default: true }
+          - { name: heading, label: Заглавие, type: string }
+          - { name: link_text, label: Текст на линка, type: string }
+      - name: about
+        label: Секция „За нас“
+        type: object
+        fields:
+          - { name: show, label: Показвай секцията, type: boolean, default: true }
+          - { name: eyebrow, label: Малък надпис, type: string }
+          - { name: heading, label: Заглавие, type: string }
+          - { name: text, label: Текст, type: text }
+          - { name: button_text, label: Текст на бутона, type: string }
+          - { name: button_link, label: Линк на бутона, type: string }
+          - { name: image, label: Снимка, type: image }
+          - { name: image_alt, label: Описание на снимката, type: string }
+          - { name: handwritten, label: Ръкописен текст (<br> = нов ред), type: string }
+      - name: patients
+        label: Секция „За пациентите“ (последни статии)
+        type: object
+        fields:
+          - { name: show, label: Показвай секцията, type: boolean, default: true }
+          - { name: heading, label: Заглавие, type: string }
+          - { name: link_text, label: Текст на линка, type: string }
+          - { name: count, label: Брой статии, type: number }
+      - name: reviews
+        label: Секция „Отзиви“
+        type: object
+        fields:
+          - { name: show, label: Показвай секцията (само с истински отзиви), type: boolean, default: false }
+          - { name: heading, label: Заглавие, type: string }
+          - name: items
+            label: Отзиви
+            type: object
+            list: true
+            fields:
+              - { name: text, label: Отзив, type: text }
+              - { name: name, label: Име, type: string }
+              - { name: stars, label: Звезди (1–5), type: number }
+      - name: cta
+        label: Лента „Запазете час“ (долу)
+        type: object
+        fields:
+          - { name: show, label: Показвай секцията, type: boolean, default: true }
+          - { name: heading, label: Заглавие, type: string }
+          - { name: text, label: Текст, type: string }
+          - { name: button_text, label: Текст на бутона, type: string }
+
+  - name: pages
+    label: Страници и услуги
+    type: collection
+    path: content/pages
+    view:
+      fields: [heading, type]
+    fields:
+      - { name: heading, label: Заглавие на страницата, type: string, required: true }
+      - { name: title, label: Заглавие в Google (таб на браузъра), type: string }
+      - { name: description, label: Описание в Google, type: text }
+      - { name: type, label: Вид (service = услуга), type: select, options: { values: [service, page] } }
+      - { name: section, label: "Направление (diagnostika, bremennost или hirurgia)", type: string }
+      - { name: icon, label: Икона (само за направления), type: string }
+      - { name: summary, label: Кратко описание (за картичката в „Услуги“), type: string }
+      - { name: order, label: Подредба в „Услуги“, type: number }
+      - { name: image, label: Снимка (по желание), type: image }
+      - { name: template, label: Шаблон (не променяйте), type: string }
+      - { name: hidden, label: Скрий страницата, type: boolean }
+      - { name: body, label: Текст, type: rich-text }
+
+  - name: articles
+    label: За пациентите (статии)
+    type: collection
+    path: content/articles
+    view:
+      fields: [heading, category, date]
+    fields:
+      - { name: heading, label: Заглавие, type: string, required: true }
+      - { name: title, label: Заглавие в Google, type: string }
+      - { name: description, label: Описание в Google, type: text }
+      - { name: category, label: Категория, type: string }
+      - { name: date, label: Дата, type: date }
+      - { name: excerpt, label: Кратко описание (за картичката), type: text }
+      - { name: image, label: Снимка (по желание), type: image }
+      - { name: hidden, label: Скрий статията, type: boolean }
+      - { name: body, label: Текст, type: rich-text }
+
+  - name: doctors
+    label: Специалисти
+    type: collection
+    path: content/doctors
+    view:
+      fields: [name]
+    fields:
+      - { name: name, label: Име, type: string, required: true }
+      - { name: role, label: Специалност, type: string }
+      - { name: photo, label: Снимка, type: image }
+      - { name: summary, label: Кратък текст за началната страница, type: text }
+      - { name: order, label: Подредба, type: number }
+      - { name: body, label: Биография, type: rich-text }
+
+  - name: prices
+    label: Цени
+    type: file
+    path: content/prices.yml
+    fields:
+      - { name: heading, label: Заглавие, type: string }
+      - { name: intro, label: Текст над цените, type: text }
+      - { name: note, label: Бележка под цените, type: text }
+      - name: groups
+        label: Групи
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Име на групата, type: string }
+          - name: items
+            label: Услуги
+            type: object
+            list: true
+            fields:
+              - { name: name, label: Услуга, type: string }
+              - { name: price, label: Цена, type: string }
+
+  - name: site
+    label: Данни за кабинета
+    type: file
+    path: content/site.yml
+    fields:
+      - { name: name, label: Име, type: string }
+      - { name: tagline, label: Слоган под логото, type: string }
+      - { name: description, label: Описание в Google (по подразбиране), type: text }
+      - { name: phone, label: Телефон (както се показва), type: string }
+      - { name: phone_link, label: Телефон за набиране (+359...), type: string }
+      - { name: hours, label: Работно време, type: string }
+      - { name: booking_note, label: Бележка за записване, type: string }
+      - { name: address, label: Адрес, type: string }
+      - { name: address_note, label: Как да ни намерите, type: string }
+      - { name: map_link, label: Линк към Google Maps, type: string }
+      - { name: nzok_note, label: Бележка за НЗОК, type: string }
+      - { name: facebook, label: Facebook линк, type: string }
+      - { name: instagram, label: Instagram линк, type: string }
+      - { name: book_button, label: Текст на бутона в менюто, type: string }
+      - name: menu
+        label: Меню
+        type: object
+        list: true
+        fields:
+          - { name: label, label: Текст, type: string }
+          - { name: link, label: Линк, type: string }

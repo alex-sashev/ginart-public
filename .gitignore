@@ -1,0 +1,9 @@
+.venv/
+dist/
+.DS_Store
+__pycache__/
+
+# Internal project notes — kept on this Mac only, not published
+CLAUDE.md
+decisions.md
+open-questions.md

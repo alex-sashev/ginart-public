@@ -1,0 +1,11 @@
+{% if home.cta.show %}
+<section class="cta">
+  <div class="wrap">
+    <div>
+      <h2>{{ home.cta.heading }}</h2>
+      <p>{{ home.cta.text }}</p>
+    </div>
+    <a href="tel:{{ site.phone_link }}" class="btn btn-rose"><svg><use href="#i-phone"/></svg><span>{{ home.cta.button_text }}</span><svg><use href="#i-arr"/></svg></a>
+  </div>
+</section>
+{% endif %}

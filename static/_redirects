@@ -1,0 +1,7 @@
+# Old addresses from the previous site -> new pages
+/adres/              /kontakt/                     301
+/karta/              /kontakt/                     301
+/saveti/             /za-pacientite/               301
+/ginekologiya-2/     /za-pacientite/kolko-chesto-pri-ginekolog/ 301
+/vaginalno-techenie/ /za-pacientite/vaginalno-techenie/         301
+/statii/*            /za-pacientite/:splat         301

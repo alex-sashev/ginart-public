@@ -1,0 +1,14 @@
+{% extends "page.html" %}
+{% block content %}
+<p class="intro">{{ prices.intro }}</p>
+{% for g in prices.groups %}
+<h2>{{ g.title }}</h2>
+<table class="prices">
+  <tbody>
+    {% for i in g["items"] %}<tr><td>{{ i.name }}</td><td>{{ i.price }}</td></tr>{% endfor %}
+  </tbody>
+</table>
+{% endfor %}
+<p class="meta">{{ prices.note }}</p>
+{{ page.body|safe }}
+{% endblock %}

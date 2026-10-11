@@ -1,0 +1,19 @@
+{% extends "page.html" %}
+{% block content %}
+{% for sec in sections %}
+<section class="svc-group">
+  <h2><a href="/{{ sec.slug }}/">{{ sec.heading }}</a></h2>
+  <p>{{ sec.summary }}</p>
+  <div class="svc-cards">
+    {% for s in sec.services %}
+    <a class="svc-card" href="/{{ s.slug }}/">
+      <h3>{{ s.heading }}</h3>
+      <p>{{ s.summary }}</p>
+      <span class="link">Научете повече <svg><use href="#i-arr"/></svg></span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+{% endfor %}
+{{ page.body|safe }}
+{% endblock %}

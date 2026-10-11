@@ -1,0 +1,6 @@
+{% if d.superdoc_rating %}
+<a class="rating-badge" href="{{ d.superdoc_url }}#reviews" target="_blank" rel="noopener" aria-label="Оценка {{ d.superdoc_rating }} от 5 от {{ d.superdoc_count }} пациенти в SuperDoc">
+  <span class="stars" aria-hidden="true">★</span><strong>{{ "%.1f"|format(d.superdoc_rating|float) }}</strong>
+  <span>{{ "{:,}".format(d.superdoc_count|int).replace(",", " ") }} оценки в SuperDoc</span>
+</a>
+{% endif %}
