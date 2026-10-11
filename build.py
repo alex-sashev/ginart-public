@@ -7,7 +7,7 @@ templates/ into dist/, which is what Cloudflare Pages publishes.
     python3 build.py --serve    # build, then preview on http://localhost:8000
 
 Optional settings (used by the GitHub Pages preview):
-    BASE_PATH=/GinArt   site lives under a sub-folder, e.g. alex-sashev.github.io/GinArt/
+    BASE_PATH=/ginart-public   site lives under a sub-folder, e.g. alex-sashev.github.io/ginart-public/
     PREVIEW=1           add "noindex" so search engines skip the preview
 """
 import os

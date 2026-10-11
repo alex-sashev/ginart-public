@@ -1,5 +1,5 @@
 # Builds the site and publishes the preview on GitHub Pages:
-# https://alex-sashev.github.io/GinArt/  (hidden from search engines)
+# https://alex-sashev.github.io/ginart-public/  (hidden from search engines)
 name: Publish preview (GitHub Pages)
 on:
   push:
@@ -17,6 +17,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   deploy:
+    if: github.repository == 'alex-sashev/ginart-public'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -29,7 +30,7 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python build.py
         env:
-          BASE_PATH: /GinArt
+          BASE_PATH: /ginart-public
           PREVIEW: "1"
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3

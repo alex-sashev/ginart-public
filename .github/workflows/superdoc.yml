@@ -9,6 +9,7 @@ permissions:
   contents: write
 jobs:
   refresh:
+    if: github.repository == 'alex-sashev/ginart-public'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

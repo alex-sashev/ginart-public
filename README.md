@@ -17,7 +17,10 @@ python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
 .venv/bin/python build.py --serve
 ```
 
-## Deploy (Cloudflare Pages)
+## Preview (GitHub Pages)
+Every push to `main` publishes **https://alex-sashev.github.io/ginart-public/** (hidden from search engines) via `.github/workflows/pages.yml`.
+
+## Deploy for launch (Cloudflare Pages)
 Workers & Pages → Create → Pages → Connect to Git → `alex-sashev/GinArt`
 - Framework preset: **None**
 - Build command: `pip install -r requirements.txt && python build.py`
