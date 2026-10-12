@@ -7,3 +7,7 @@ __pycache__/
 CLAUDE.md
 decisions.md
 open-questions.md
+
+# Review documents
+*.docx
+~$*
