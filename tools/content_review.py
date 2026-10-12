@@ -22,6 +22,7 @@ from docx.shared import Cm, Pt, RGBColor
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / "content"
 PREVIEW = "https://alex-sashev.github.io/ginart-public"
+SHOTS = ROOT / "review-shots"  # made by tools/screenshots.py
 
 PLUM = RGBColor(0x6B, 0x23, 0x40)
 GREY = RGBColor(0x80, 0x80, 0x80)
@@ -161,7 +162,26 @@ class Review:
         footer.runs[0].font.color.rgb = GREY
         self.table = None
 
-    def page(self, title, url=None, note=None, first=False):
+    def shots(self, url, only=None):
+        """Insert the screenshot slices of a page (made by tools/screenshots.py)."""
+        folder = SHOTS / (url.strip("/").replace("/", "__") or "home")
+        files = sorted(folder.glob("*.jpg"))
+        if only is not None:
+            files = [files[i] for i in only if -len(files) <= i < len(files)]
+        if not files:
+            return
+        r = self.doc.add_paragraph().add_run("Как изглежда страницата сега:")
+        r.bold = True
+        r.font.size = Pt(9.5)
+        r.font.color.rgb = GREY
+        for img in files:
+            p = self.doc.add_paragraph()
+            p.alignment = 1  # center
+            p.paragraph_format.space_after = Pt(0)
+            p.add_run().add_picture(str(img), width=Cm(21))
+        self.doc.add_paragraph()
+
+    def page(self, title, url=None, note=None, first=False, shot=True):
         if not first:
             self.doc.add_paragraph().add_run().add_break(WD_BREAK.PAGE)
         self.doc.add_heading(title, level=1)
@@ -175,13 +195,17 @@ class Review:
                 r = p.add_run(("\n" if url else "") + note)
                 r.font.size = Pt(9)
                 r.italic = True
+        if url and shot:
+            self.shots(url)
 
-    def section(self, title, note=None):
+    def section(self, title, note=None, shot=None):
         self.doc.add_heading(title, level=2)
         if note:
             r = self.doc.add_paragraph().add_run(note)
             r.font.size = Pt(9)
             r.italic = True
+        if shot:
+            self.shots(shot)
         t = self.doc.add_table(rows=1, cols=4)
         t.style = "Table Grid"
         t.alignment = WD_TABLE_ALIGNMENT.CENTER
@@ -298,7 +322,8 @@ def build(out):
         rv.row(code, field, text)
 
     # --- general details ---
-    rv.page("Общи данни (на всички страници)", "/", "Показват се в горното меню, долната част на всяка страница и бутоните за записване.")
+    rv.page("Общи данни (на всички страници)", "/", "Показват се в горното меню, долната част на всяка страница и бутоните за записване.", shot=False)
+    rv.shots("/", only=[0, -1])
     rv.section("Данни за кабинета")
     for key, label in (("name", "Име"), ("tagline", "Слоган под логото"), ("phone", "Телефон за записване"),
                        ("hours", "Работно време"), ("booking_note", "Бележка за записването"),
@@ -354,7 +379,8 @@ def build(out):
             if s != (xm["section"][0] if isinstance(xm["section"], list) else xm["section"]):
                 continue  # services listed under two areas appear only under the first
             meta2, body2 = pages[x]
-            rv.section(f"Услуга: {xm['heading']}", f"Страница на сайта: {PREVIEW}/{x}/")
+            rv.page(f"Услуга: {xm['heading']}", f"/{x}/", f"Част от направление „{m['heading']}“")
+            rv.section("Съдържание на страницата")
             md_page(rv, f"pages/{x}", meta2, body2)
 
     # --- doctors ---
@@ -388,7 +414,8 @@ def build(out):
     arts = sorted((CONTENT / "articles").glob("*.md"), key=lambda p: str(load_md(p)[0].get("date", "")), reverse=True)
     for p in arts:
         meta, body = load_md(p)
-        rv.section(f"Статия: {meta['heading']}", f"Страница на сайта: {PREVIEW}/za-pacientite/{p.stem}/")
+        rv.page(f"Статия: {meta['heading']}", f"/za-pacientite/{p.stem}/")
+        rv.section("Съдържание на статията")
         md_page(rv, f"articles/{p.stem}", meta, body)
 
     # --- other pages ---
