@@ -5,7 +5,7 @@ photo: /images/dr-kovachev.jpg
 # SuperDoc rating shown on the profile (refreshed weekly)
 superdoc_url: https://superdoc.bg/lekar/stefan-kovachev-dm
 superdoc_rating: 4.9
-superdoc_count: 329
+superdoc_count: 332
 order: 1
 # Short text for the homepage card (1–2 sentences)
 summary: Началник на Клиниката по гинекология в Болница „Доверие“. Онкогинекология, ендоскопска и роботизирана хирургия, ехография.
