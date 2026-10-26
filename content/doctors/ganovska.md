@@ -5,7 +5,7 @@ photo: /images/dr-ganovska.jpg
 # SuperDoc rating shown on the profile (refreshed weekly)
 superdoc_url: https://superdoc.bg/lekar/d-r-anita-ganovska-1844
 superdoc_rating: 5.0
-superdoc_count: 1736
+superdoc_count: 1741
 order: 2
 # Short text for the homepage card (1–2 sentences)
 summary: Лекар в Клиниката по гинекология на Болница „Доверие“. Хистероскопия, лапароскопия, колпоскопия, ехография и онкогинекология.
